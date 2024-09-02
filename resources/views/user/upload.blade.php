@@ -21,7 +21,7 @@
             <div class="w-auto h-40 bg-gradient-to-t from-gray-500 to-gray-300 flex items-center">
                 <p class="font-poppins font-normal text-2xl ms-4 text-white">Tentang Masakan</p>
             </div>
-            <div class="w-auto flex ">
+            <div class="w-auto flex">
                 <button class="flex flex-grow items-center justify-center bg-gray-600">
                     <p class="font-poppins font-light text-white px-5 py-2">Tentang</p>
                 </button>
@@ -32,7 +32,7 @@
                     <p class="font-poppins font-light text-white px-5 py-2 ">Langkah</p>
                 </button>
             </div>
-            <form action="" enctype="multipart/form-data" class="mx-3 hidden">
+            <form action="" enctype="multipart/form-data" class="mx-3 ">
                 <div class="mt-5 mx-3 w-auto flex flex-col ">
                     <input type="text" name="judul" placeholder="Tulis judul makanan"
                         class="p-3 text-gray-400 font-poppins font-thin rounded-md w-full focus:ring-gray-500 focus:outline-1 focus:border-gray-500 focus:text-[#3d3d3d]">
@@ -143,7 +143,6 @@
                             class="p-3 text-gray-400  font-poppins font-thin w-full border-l-0 border-t-0 border-r-0 border-b-2 focus:ring-gray-500 focus:outline-1 focus:border-gray-500 focus:text-[#3d3d3d]">
                     </div>
                     <button class="flex items-center mt-4" type="button">
-
                         <svg aria-hidden="true" class="w-7 h-7 mb-3 rounded-full bg-gray-200 text-gray-400"
                             fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
@@ -161,7 +160,9 @@
             </form>
         </div>
     </main>
-    <div class="bg-white w-full h-14 fixed bottom-0 right-0">
+
+    <x-footer></x-footer>
+    {{-- <div class="bg-white w-full h-14 fixed bottom-0 right-0">
         <div class="flex justify-around items-center">
             <a href="#" class="text-gradient flex flex-col items-center group">
                 <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -212,6 +213,7 @@
                 </svg>
                 <p class="font-poppins font-thin text-xs">Cari</p>
             </a>
+
             <a href="#" class="text-gradient flex flex-col items-center group">
                 <svg id="fi_3024515" enable-background="new 0 0 189.524 189.524" height="24"
                     viewBox="0 0 189.524 189.524" width="24" xmlns="http://www.w3.org/2000/svg" class="icon">
@@ -242,6 +244,7 @@
                 </svg>
                 <p class="font-poppins font-thin text-xs text-gradient-text">Upload</p>
             </a>
+
             <a href="#" class="text-gradient flex flex-col items-center group">
                 <svg id="fi_9283030" class="icon" height="24" viewBox="0 0 64 64" width="24"
                     xmlns="http://www.w3.org/2000/svg" data-name="Layer 1">
@@ -287,5 +290,6 @@
                 <p class="font-poppins font-thin text-xs text-gradient-text">Pengaturan</p>
             </a>
         </div>
-    </div>
+    </div> --}}
+    
 </x-layout>

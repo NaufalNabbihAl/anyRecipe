@@ -264,7 +264,8 @@
             </div>
         </div>
     </main>
-    <div class="bg-white w-full h-14 fixed bottom-0 right-0">
+    <x-footer></x-footer>
+    {{-- <div class="bg-white w-full h-14 fixed bottom-0 right-0">
         <div class="flex justify-around items-center">
             <a href="#" class="text-gradient flex flex-col items-center group">
                 <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -391,7 +392,6 @@
                 </svg>
                 <p class="font-poppins font-thin text-xs text-gradient-text">Pengaturan</p>
             </a>
-
         </div>
-    </div>
+    </div> --}}
 </x-layout>
