@@ -31,7 +31,10 @@ Route::controller(AuthController::class)->as('auth.')->group(function () {
     Route::get('/otp', 'otp')->name('otp');
     Route::post('/otp','otpVerify')->name('otpVerify');
     Route::get('/login', 'login')->name('login');
+    Route::post('/login', 'loginAuth')->name('loginAuth');
+    Route::get('/logout', 'logout')->name('logout');
     Route::get('/newpassword', 'newPassword')->name('newPassword');
+    Route::post('/newpassword', 'newPasswordStore')->name('newPasswordStore');
     Route::get('/confirmUserSuccess', 'confirmUserSuccess')->name('confirmUserSuccess');
 });
 
@@ -42,6 +45,8 @@ Route::controller(UserController::class)->as('user.')->group(function () {
     Route::get('/previous', 'previous')->name('previous');
     Route::get('/dashboard', 'dashboard')->name('dashboard');
     Route::get('/search', 'search')->name('search');
+    Route::get('/setting', 'setting')->name('setting');
+    Route::get('/changeNamePassword', 'changeNamePassword')->name('changeNamePassword');
 });
 
 Route::controller(ArticlesController::class)->as('articles.')->group(function () {

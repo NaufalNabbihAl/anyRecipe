@@ -29,7 +29,7 @@
     }
 </style>
 
-<div class="bg-white w-full h-14 fixed bottom-0 right-0">
+<div class="bg-white w-full h-14 pt-3 fixed bottom-0 right-0">
     <div class="flex justify-around items-center">
         <a href="{{ route('user.dashboard') }}" class="nav-item text-gradient flex flex-col items-center group">
             <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="icon">
@@ -123,7 +123,7 @@
             </svg>
             <p class="font-poppins font-thin text-xs">Artikel</p>
         </a>
-        <a href="#" class="text-gradient flex flex-col items-center group">
+        <a href="{{ route('user.setting') }}" class="nav-item text-gradient flex flex-col items-center group">
             <svg version="1.1" id="fi_484664" xmlns="http://www.w3.org/2000/svg"
                 xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 512 512"
                 class="icon" xml:space="preserve">

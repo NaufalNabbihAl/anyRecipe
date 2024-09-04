@@ -21,7 +21,8 @@
                         mengirimkan kode OTP</p>
                 </div>
                 <div>
-                    <form action="#" method="POST">
+                    <form action="{{ route('auth.resetStore') }}" method="POST">
+                        @csrf
                         <div class="relative mt-6">
                             <input id="email" name="email" type="text" placeholder="Masukkan Email Anda"
                                 required

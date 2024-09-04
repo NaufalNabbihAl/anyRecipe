@@ -20,7 +20,8 @@
                         Daftar</h2>
                 </div>
                 <div class="mt-5 sm:mx-auto sm:w-full sm:max-w-sm">
-                    <form class="space-y-6" action="#" method="POST">
+                    <form class="space-y-6" action="{{ route('auth.store') }}" method="POST">
+                        @csrf
                         <div>
                             <div class="relative mt-2">
                                 <input id="name" name="name" type="text" placeholder="Masukkan nama pengguna"
@@ -61,7 +62,7 @@
                         </div>
                         <div>
                             <div class="mt-2 relative" x-data="{ showPassword: false }">
-                                <input :type="showPassword ? 'text' : 'password'" id="password" name="password"
+                                <input :type="showPassword ? 'text' : 'password'" id="password" name="confirm-password"
                                     placeholder="Konfirmasi kata sandi" autocomplete="current-password" required
                                     class="block font-poppins font-extralight w-full flex-1 bg-white border-t-0 border-l-0 border-r-0 py-1.5 text-gray-500 shadow-sm  placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-gray-100 sm:text-sm sm:leading-6 pl-10">
                                 <span @click="showPassword = !showPassword"
@@ -85,9 +86,7 @@
                                 <p class="font-poppins font-normal text-sm text-[#3D3D3D]">Sudah punya akun? <a
                                         href="{{ route('auth.login') }}" class="font-poppins font-medium text-sm text-[#3D3D3D]">Masuk
                                     </a></p>
-
                             </div>
-
                         </div>
                     </form>
                     <div class="flex items-center space-x-2 mt-3">

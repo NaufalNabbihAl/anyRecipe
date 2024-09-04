@@ -31,4 +31,14 @@ class UserController extends Controller
     {
         return view('user.upload');
     }
+
+    public function setting()
+    {
+        return view('user.setting');
+    }
+
+    public function changeNamePassword()
+    {
+        return view('user.changeNamePassword');
+    }
 }

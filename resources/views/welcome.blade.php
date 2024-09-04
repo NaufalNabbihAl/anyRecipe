@@ -12,7 +12,7 @@
                 <p class="font-poppins font-medium">ApapunBisaDimasak</p>
             </div>
             <div>
-                <a href="{{ route('auth.login')}}" class="flex items-center justify-center text-white bg-[#FBBC05] mx-16 mt-5 rounded-md h-8 ">Lanjutkan</a>
+                <a href="{{ route('auth.login')}}" class="flex items-center justify-center text-white bg-[#FBBC05] mx-16 mt-5 rounded-md h-11 ">Lanjutkan</a>
             </div>
             <div class="flex justify-center mt-3">
                 <p class="font-poppins font-thin text-sm text-gray-400">Sudah punya akun? </p>
