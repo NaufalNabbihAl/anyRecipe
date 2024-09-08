@@ -3,7 +3,7 @@
         <div class="w-full h-8 bg-[#FBBC05]"></div>
         <div class="flex px-6 lg:px-8 h-16">
             <div class="flex item-center -ms-4 md:ms-0 md:justify-center justify-between w-full">
-                <a href="" class="text-white items-center mr-24 flex">
+                <a href="{{ route('articles.index') }}" class="text-white items-center mr-24 flex">
                     <svg width="30" height="30" viewBox="0 0 30 30" fill="currentColor" F
                         xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -11,16 +11,20 @@
                             fill="white" />
                         />
                     </svg>
-                    <p class="font-poppins font-normal">Cari Resep</p>
+                    <p class="font-poppins font-normal">Artikel</p>
                 </a>
             </div>
         </div>
     </nav>
-
-    <main class="pt-36">
+    <main class="pt-28">
         <div class="mx-auto md:mt-2 lg:px-8 block max-w-sm">
             <div class="w-auto px-1">
-                
+                <h1 class="font-poppins font-semibold text-2xl">{{ $articles->title }}</h1>
+                <p class="font-poppins font-thin text-gray-400 text-sm">{{ $articles->fm }}</p>
+                <img src="{{ URL::asset('storage/' . $articles->image) }}" alt="" class="w-full h-40 object-cover rounded-md pt-2">
+
+                <p class="font-poppins font-light text-base mt-3 text-justify"> {!! $articles->content !!}</p>
+
             </div>
         </div>
     </main>
@@ -51,13 +55,11 @@
             <a href="#" class="text-gradient flex flex-col items-center group">
                 <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <defs>
-                        <linearGradient id="grad-default" x1="0%" y1="0%" x2="100%"
-                            y2="100%">
+                        <linearGradient id="grad-default" x1="0%" y1="0%" x2="100%" y2="100%">
                             <stop offset="0%" style="stop-color:#3d3d3d;stop-opacity:1" />
                             <stop offset="100%" style="stop-color:#3d3d3d;stop-opacity:1" />
                         </linearGradient>
-                        <linearGradient id="grad-hover" x1="0%" y1="0%" x2="100%"
-                            y2="100%">
+                        <linearGradient id="grad-hover" x1="0%" y1="0%" x2="100%" y2="100%">
                             <stop offset="0%" style="stop-color:#FD666D;stop-opacity:1" />
                             <stop offset="100%" style="stop-color:#FBBC05;stop-opacity:1" />
                         </linearGradient>
@@ -77,8 +79,7 @@
                 <svg id="fi_3024515" enable-background="new 0 0 189.524 189.524" height="24"
                     viewBox="0 0 189.524 189.524" width="24" xmlns="http://www.w3.org/2000/svg" class="icon">
                     <defs>
-                        <linearGradient id="grad-hover" x1="0%" y1="0%" x2="100%"
-                            y2="100%">
+                        <linearGradient id="grad-hover" x1="0%" y1="0%" x2="100%" y2="100%">
                             <stop offset="0%" style="stop-color:#FD666D; stop-opacity:1" />
                             <stop offset="100%" style="stop-color:#FBBC05; stop-opacity:1" />
                         </linearGradient>

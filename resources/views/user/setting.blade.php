@@ -40,117 +40,118 @@
                         <div class="rounded-full bg-gray-200 w-4 h-4 flex items-center justify-center">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                                 stroke="currentColor" class="size-3">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-                            </svg>
-                        </div>
-                    </a>
-                    <a href=#" class="flex px-5 py-2 items-center justify-between">
-                        <div class="flex py-3">
-                            <img src="{{ asset('images/payment.svg') }}" alt="">
-                            <p class="font-poppins font-medium text-lg ps-5">Pilihan Pembayaran</p>
-                        </div>
-                        <div class="rounded-full bg-gray-200 w-4 h-4 flex items-center justify-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                                stroke="currentColor" class="size-3">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-                            </svg>
-                        </div>
-                    </a>
-                    <a href=#" class="flex px-5 py-2 items-center justify-between">
-                        <div class="flex py-3">
-                            <img src="{{ asset('images/bookmark2.svg') }}" alt="">
-                            <p class="font-poppins font-medium text-lg ps-5">Artikel Tersimpan</p>
-                        </div>
-                        <div class="rounded-full bg-gray-200 w-4 h-4 flex items-center justify-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                                stroke="currentColor" class="size-3">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-                            </svg>
-                        </div>
-                    </a>
-                </div>
-                <p class="font-poppins font-medium text-base text-gray-500 ms-4 pt-5 pb-2">Pertanyaan & Bantuan</p>
-                <div class="bg-gray-100">
-                    <a href=#" class="flex px-5 py-2 items-center justify-between">
-                        <div class="flex py-3">
-                            <img src="{{ asset('images/faq.svg') }}" alt="">
-                            <p class="font-poppins font-medium text-lg ps-5">Pertanyaan Umum</p>
-                        </div>
-                        <div class="rounded-full bg-gray-200 w-4 h-4 flex items-center justify-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                                stroke="currentColor" class="size-3">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-                            </svg>
-                        </div>
-                    </a>
-                    <a href=#" class="flex px-5 py-2 items-center justify-between">
-                        <div class="flex py-3">
-                            <img src="{{ asset('images/consultation.svg') }}" alt="">
-                            <p class="font-poppins font-medium text-lg ps-5">Bantuan</p>
-                        </div>
-                        <div class="rounded-full bg-gray-200 w-4 h-4 flex items-center justify-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                                stroke="currentColor" class="size-3">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-                            </svg>
-                        </div>
-                    </a>
-                    <a href=#" class="flex px-5 py-2 items-center justify-between">
-                        <div class="flex py-3">
-                            <img src="{{ asset('images/lock3.svg') }}" alt="">
-                            <p class="font-poppins font-medium text-lg ps-5">Kebijakan Privasi</p>
-                        </div>
-                        <div class="rounded-full bg-gray-200 w-4 h-4 flex items-center justify-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                                stroke="currentColor" class="size-3">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-                            </svg>
-                        </div>
-                    </a>
-                    <a href=#" class="flex px-5 py-2 items-center justify-between">
-                        <div class="flex py-3">
-                            <img src="{{ asset('images/info.svg') }}" alt="">
-                            <p class="font-poppins font-medium text-lg ps-5">Tentang Kita</p>
-                        </div>
-                        <div class="rounded-full bg-gray-200 w-4 h-4 flex items-center justify-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                                stroke="currentColor" class="size-3">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-                            </svg>
-                        </div>
-                    </a>
-                </div>
-                <p class="font-poppins font-medium text-base text-gray-500 ms-4 pt-5 pb-2">Akun & Pembayaran</p>
-                <div class="bg-gray-100">
-                    <a href=#" class="flex px-5 py-2 items-center justify-between">
-                        <div class="flex py-3">
-                            <img src="{{ asset('images/logout.svg') }}" alt="">
-                            <p class="font-poppins font-medium text-lg ps-5">Keluar Akun</p>
-                        </div>
-                        <div class="rounded-full bg-gray-200 w-4 h-4 flex items-center justify-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                                stroke="currentColor" class="size-3">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-                            </svg>
-                        </div>
-                    </a>
-                    <a href=#" class="flex px-5 py-2 items-center justify-between">
-                        <div class="flex py-3">
-                            <img src="{{ asset('images/trash.svg') }}" alt="">
-                            <p class="font-poppins font-medium text-lg ps-5">Hapus Akun</p>
-                        </div>
-                        <div class="rounded-full bg-gray-200 w-4 h-4 flex items-center justify-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                                stroke="currentColor" class="size-3">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-                            </svg>
-                        </div>
-                    </a>
-                </div>
-            </div>
+                                <path stroke-linecap="round" stroke-linejoin="round" d=" m8.25 4.5 7.5 7.5-7.5 7.5" />
+    </svg>
+    </div>
+    </a>
+    <a href=#" class="flex px-5 py-2 items-center justify-between">
+        <div class="flex py-3">
+            <img src="{{ asset('images/payment.svg') }}" alt="">
+            <p class="font-poppins font-medium text-lg ps-5">Pilihan Pembayaran</p>
         </div>
+        <div class="rounded-full bg-gray-200 w-4 h-4 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                stroke="currentColor" class="size-3">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+            </svg>
+        </div>
+    </a>
+    <a href=#" class="flex px-5 py-2 items-center justify-between">
+        <div class="flex py-3">
+            <img src="{{ asset('images/bookmark2.svg') }}" alt="">
+            <p class="font-poppins font-medium text-lg ps-5">Artikel Tersimpan</p>
+        </div>
+        <div class="rounded-full bg-gray-200 w-4 h-4 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                stroke="currentColor" class="size-3">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+            </svg>
+        </div>
+    </a>
+    </div>
+    <p class="font-poppins font-medium text-base text-gray-500 ms-4 pt-5 pb-2">Pertanyaan & Bantuan</p>
+    <div class="bg-gray-100">
+        <a href=#" class="flex px-5 py-2 items-center justify-between">
+            <div class="flex py-3">
+                <img src="{{ asset('images/faq.svg') }}" alt="">
+                <p class="font-poppins font-medium text-lg ps-5">Pertanyaan Umum</p>
+            </div>
+            <div class="rounded-full bg-gray-200 w-4 h-4 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                    stroke="currentColor" class="size-3">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                </svg>
+            </div>
+        </a>
+        <a href=#" class="flex px-5 py-2 items-center justify-between">
+            <div class="flex py-3">
+                <img src="{{ asset('images/consultation.svg') }}" alt="">
+                <p class="font-poppins font-medium text-lg ps-5">Bantuan</p>
+            </div>
+            <div class="rounded-full bg-gray-200 w-4 h-4 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                    stroke="currentColor" class="size-3">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                </svg>
+            </div>
+        </a>
+        <a href=#" class="flex px-5 py-2 items-center justify-between">
+            <div class="flex py-3">
+                <img src="{{ asset('images/lock3.svg') }}" alt="">
+                <p class="font-poppins font-medium text-lg ps-5">Kebijakan Privasi</p>
+            </div>
+            <div class="rounded-full bg-gray-200 w-4 h-4 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                    stroke="currentColor" class="size-3">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                </svg>
+            </div>
+        </a>
+        <a href=#" class="flex px-5 py-2 items-center justify-between">
+            <div class="flex py-3">
+                <img src="{{ asset('images/info.svg') }}" alt="">
+                <p class="font-poppins font-medium text-lg ps-5">Tentang Kita</p>
+            </div>
+            <div class="rounded-full bg-gray-200 w-4 h-4 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                    stroke="currentColor" class="size-3">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                </svg>
+            </div>
+        </a>
+    </div>
+    <p class="font-poppins font-medium text-base text-gray-500 ms-4 pt-5 pb-2">Akun & Pembayaran</p>
+    <div class="bg-gray-100">
+        <a href="{{ route('auth.logout') }}" class="flex px-5 py-2 items-center justify-between">
+            <div class="flex py-3">
+                <img src="{{ asset('images/logout.svg') }}" alt="">
+                <p class="font-poppins font-medium text-lg ps-5">Keluar Akun</p>
+            </div>
+            <div class="rounded-full bg-gray-200 w-4 h-4 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                    stroke="currentColor" class="size-3">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                </svg>
+            </div>
+        </a>
+        <form action="{{ route('user.deleteUser', $user->id) }}" method="POST" class="inline-block">
+            @csrf
+            @method('DELETE')
+
+            <button type="submit" class="flex px-5 py-2 items-center justify-between">
+                <div class="flex py-3">
+                    <img src="{{ asset('images/trash.svg') }}" alt="">
+                    <p class="font-poppins font-medium text-lg ps-5">Hapus Akun</p>
+                </div>
+                <div class="rounded-full bg-gray-200 w-4 h-4 flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                        stroke="currentColor" class="size-3">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                    </svg>
+                </div>
+            </button>
+        </form>
+    </div>
     </main>
-
     <x-footer></x-footer>
-
 </x-layout>

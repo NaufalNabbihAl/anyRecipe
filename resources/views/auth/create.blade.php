@@ -84,7 +84,8 @@
                         <div class="flex justify-center mt-3">
                             <div class="flex items-center">
                                 <p class="font-poppins font-normal text-sm text-[#3D3D3D]">Sudah punya akun? <a
-                                        href="{{ route('auth.login') }}" class="font-poppins font-medium text-sm text-[#3D3D3D]">Masuk
+                                        href="{{ route('auth.login') }}"
+                                        class="font-poppins font-medium text-sm text-[#3D3D3D]">Masuk
                                     </a></p>
                             </div>
                         </div>
@@ -95,10 +96,10 @@
                         <div class="border-t border-gray-400 w-36 md:w-28"></div>
                     </div>
                     <div class="flex justify-center my-8 ">
-                        <div
+                        <a href="{{ route('google.redirectToGoogle') }}"
                             class="block mr-10 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-70">
                             <img class="p-2" src="{{ asset('images/google.svg') }}" alt="">
-                        </div>
+                        </a>
                         <div
                             class="block mr-10 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-70">
                             <img class="p-2" src="{{ asset('images/facebook.svg') }}" alt="">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Articles;
 use Illuminate\Http\Request;
 
@@ -10,9 +11,10 @@ class ArticlesController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Articles $articles)
     {
-        return view('user.articles.index');
+        $articles = Articles::all();
+        return view('user.articles.index', compact('articles'));
     }
 
     /**
@@ -34,11 +36,11 @@ class ArticlesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show()
+    public function show($id)
     {
-        // $articles = Articles::find($id);
-        // return view('user.articles.show', compact('articles'));
-        return view('user.articles.show');
+        $articles = Articles::find($id);
+        $articles->fm = Carbon::parse($articles->created_at)->translatedFormat('d F Y');
+        return view('user.articles.show', compact('articles'));
     }
 
     /**

@@ -15,7 +15,7 @@
                 </a>
             </div>
         </div>
-        <div class="bg-white pt-2">
+        <div class="bg-white pt-2 pb-2">
             <form class="mx-4 ">
                 <label for="default-search"
                     class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
@@ -64,177 +64,35 @@
             </form>
         </div>
     </nav>
-    <main class="pt-48">
+    <main class="pt-48 pb-40">
         <div class="mx-auto md:mt-2 lg:px-8 block max-w-md">
+            @php
+                $currentLetter = ''; // Variable to track the current alphabet letter
+            @endphp
 
-            <div class="mx-4 mt-6">
-                <p class="font-poppins font-medium text-2xl">A</p>
-                <div class="flex items-center mb-4 mt-5">
-                    <label for="default-checkbox" class=" text-2xl font-light text-gray-900 ">Ayam</label>
-                    <input id="default-checkbox" type="checkbox" value="#"
-                        class="ms-72 w-4 h-4 text-black  border-none rounded-full focus:ring-0">
+            @foreach ($ingredients as $ingredient)
+                @if (strtoupper($ingredient->name[0]) !== $currentLetter)
+                    @php
+                        $currentLetter = strtoupper($ingredient->name[0]); // Update the current letter
+                    @endphp
+
+                    <!-- Display the alphabetic letter -->
+                    <div class="mx-4 mt-6">
+                        <p class="font-poppins font-medium text-2xl">{{ $currentLetter }}</p>
+                    </div>
+                @endif
+
+                <!-- Display the ingredient name below the alphabetic letter -->
+                <div class="mx-4 mt-6">
+                    <div class="flex items-center mb-4 mt-5">
+                        <label for="ingredient-checkbox-{{ $ingredient->id }}"
+                            class="text-2xl w-full font-light text-gray-900">{{ $ingredient->name }}</label>
+                        <input id="ingredient-checkbox-{{ $ingredient->id }}" type="checkbox" value="#"
+                            class=" w-4 h-4 text-black border-none rounded-full focus:ring-0">
+                    </div>
                 </div>
-            </div>
-            <div class="mx-4 mt-6">
-                <p class="font-poppins font-medium text-2xl">A</p>
-                <div class="flex items-center mb-4 mt-5">
-                    <label for="default-checkbox" class=" text-2xl font-light text-gray-900 ">Ayam</label>
-                    <input id="default-checkbox" type="checkbox" value="#"
-                        class="ms-72 w-4 h-4 text-black  border-none rounded-full focus:ring-0">
-                </div>
-            </div>
-            <div class="mx-4 mt-6">
-                <p class="font-poppins font-medium text-2xl">A</p>
-                <div class="flex items-center mb-4 mt-5">
-                    <label for="default-checkbox" class=" text-2xl font-light text-gray-900 ">Ayam</label>
-                    <input id="default-checkbox" type="checkbox" value="#"
-                        class="ms-72 w-4 h-4 text-black  border-none rounded-full focus:ring-0">
-                </div>
-            </div>
-            <div class="mx-4 mt-6">
-                <p class="font-poppins font-medium text-2xl">A</p>
-                <div class="flex items-center mb-4 mt-5">
-                    <label for="default-checkbox" class=" text-2xl font-light text-gray-900 ">Ayam</label>
-                    <input id="default-checkbox" type="checkbox" value="#"
-                        class="ms-72 w-4 h-4 text-black  border-none rounded-full focus:ring-0">
-                </div>
-            </div>
-            <div class="mx-4 mt-6">
-                <p class="font-poppins font-medium text-2xl">A</p>
-                <div class="flex items-center mb-4 mt-5">
-                    <label for="default-checkbox" class=" text-2xl font-light text-gray-900 ">Ayam</label>
-                    <input id="default-checkbox" type="checkbox" value="#"
-                        class="ms-72 w-4 h-4 text-black  border-none rounded-full focus:ring-0">
-                </div>
-            </div>
-            <div class="mx-4 mt-6">
-                <p class="font-poppins font-medium text-2xl">A</p>
-                <div class="flex items-center mb-4 mt-5">
-                    <label for="default-checkbox" class=" text-2xl font-light text-gray-900 ">Ayam</label>
-                    <input id="default-checkbox" type="checkbox" value="#"
-                        class="ms-72 w-4 h-4 text-black  border-none rounded-full focus:ring-0">
-                </div>
-            </div>
-            <div class="mx-4 mt-6">
-                <p class="font-poppins font-medium text-2xl">A</p>
-                <div class="flex items-center mb-4 mt-5">
-                    <label for="default-checkbox" class=" text-2xl font-light text-gray-900 ">Ayam</label>
-                    <input id="default-checkbox" type="checkbox" value="#"
-                        class="ms-72 w-4 h-4 text-black  border-none rounded-full focus:ring-0">
-                </div>
-            </div>
-            <div class="mx-4 mt-6">
-                <p class="font-poppins font-medium text-2xl">A</p>
-                <div class="flex items-center mb-4 mt-5">
-                    <label for="default-checkbox" class=" text-2xl font-light text-gray-900 ">Ayam</label>
-                    <input id="default-checkbox" type="checkbox" value="#"
-                        class="ms-72 w-4 h-4 text-black  border-none rounded-full focus:ring-0">
-                </div>
-            </div>
-            <div class="mx-4 mt-6">
-                <p class="font-poppins font-medium text-2xl">A</p>
-                <div class="flex items-center mb-4 mt-5">
-                    <label for="default-checkbox" class=" text-2xl font-light text-gray-900 ">Ayam</label>
-                    <input id="default-checkbox" type="checkbox" value="#"
-                        class="ms-72 w-4 h-4 text-black  border-none rounded-full focus:ring-0">
-                </div>
-            </div>
-            <div class="mx-4 mt-6">
-                <p class="font-poppins font-medium text-2xl">A</p>
-                <div class="flex items-center mb-4 mt-5">
-                    <label for="default-checkbox" class=" text-2xl font-light text-gray-900 ">Ayam</label>
-                    <input id="default-checkbox" type="checkbox" value="#"
-                        class="ms-72 w-4 h-4 text-black  border-none rounded-full focus:ring-0">
-                </div>
-            </div>
-            <div class="mx-4 mt-6">
-                <p class="font-poppins font-medium text-2xl">A</p>
-                <div class="flex items-center mb-4 mt-5">
-                    <label for="default-checkbox" class=" text-2xl font-light text-gray-900 ">Ayam</label>
-                    <input id="default-checkbox" type="checkbox" value="#"
-                        class="ms-72 w-4 h-4 text-black  border-none rounded-full focus:ring-0">
-                </div>
-            </div>
-            <div class="mx-4 mt-6">
-                <p class="font-poppins font-medium text-2xl">A</p>
-                <div class="flex items-center mb-4 mt-5">
-                    <label for="default-checkbox" class=" text-2xl font-light text-gray-900 ">Ayam</label>
-                    <input id="default-checkbox" type="checkbox" value="#"
-                        class="ms-72 w-4 h-4 text-black  border-none rounded-full focus:ring-0">
-                </div>
-            </div>
-            <div class="mx-4 mt-6">
-                <p class="font-poppins font-medium text-2xl">A</p>
-                <div class="flex items-center mb-4 mt-5">
-                    <label for="default-checkbox" class=" text-2xl font-light text-gray-900 ">Ayam</label>
-                    <input id="default-checkbox" type="checkbox" value="#"
-                        class="ms-72 w-4 h-4 text-black  border-none rounded-full focus:ring-0">
-                </div>
-            </div>
-            <div class="mx-4 mt-6">
-                <p class="font-poppins font-medium text-2xl">A</p>
-                <div class="flex items-center mb-4 mt-5">
-                    <label for="default-checkbox" class=" text-2xl font-light text-gray-900 ">Ayam</label>
-                    <input id="default-checkbox" type="checkbox" value="#"
-                        class="ms-72 w-4 h-4 text-black  border-none rounded-full focus:ring-0">
-                </div>
-            </div>
-            <div class="mx-4 mt-6">
-                <p class="font-poppins font-medium text-2xl">A</p>
-                <div class="flex items-center mb-4 mt-5">
-                    <label for="default-checkbox" class=" text-2xl font-light text-gray-900 ">Ayam</label>
-                    <input id="default-checkbox" type="checkbox" value="#"
-                        class="ms-72 w-4 h-4 text-black  border-none rounded-full focus:ring-0">
-                </div>
-            </div>
-            <div class="mx-4 mt-6">
-                <p class="font-poppins font-medium text-2xl">A</p>
-                <div class="flex items-center mb-4 mt-5">
-                    <label for="default-checkbox" class=" text-2xl font-light text-gray-900 ">Ayam</label>
-                    <input id="default-checkbox" type="checkbox" value="#"
-                        class="ms-72 w-4 h-4 text-black  border-none rounded-full focus:ring-0">
-                </div>
-            </div>
-            <div class="mx-4 mt-6">
-                <p class="font-poppins font-medium text-2xl">A</p>
-                <div class="flex items-center mb-4 mt-5">
-                    <label for="default-checkbox" class=" text-2xl font-light text-gray-900 ">Ayam</label>
-                    <input id="default-checkbox" type="checkbox" value="#"
-                        class="ms-72 w-4 h-4 text-black  border-none rounded-full focus:ring-0">
-                </div>
-            </div>
-            <div class="mx-4 mt-6">
-                <p class="font-poppins font-medium text-2xl">A</p>
-                <div class="flex items-center mb-4 mt-5">
-                    <label for="default-checkbox" class=" text-2xl font-light text-gray-900 ">Ayam</label>
-                    <input id="default-checkbox" type="checkbox" value="#"
-                        class="ms-72 w-4 h-4 text-black  border-none rounded-full focus:ring-0">
-                </div>
-            </div>
-            <div class="mx-4 mt-6">
-                <p class="font-poppins font-medium text-2xl">A</p>
-                <div class="flex items-center mb-4 mt-5">
-                    <label for="default-checkbox" class=" text-2xl font-light text-gray-900 ">Ayam</label>
-                    <input id="default-checkbox" type="checkbox" value="#"
-                        class="ms-72 w-4 h-4 text-black  border-none rounded-full focus:ring-0">
-                </div>
-            </div>
-            <div class="mx-4 mt-6">
-                <p class="font-poppins font-medium text-2xl">A</p>
-                <div class="flex items-center mb-4 mt-5">
-                    <label for="default-checkbox" class=" text-2xl font-light text-gray-900 ">Ayam</label>
-                    <input id="default-checkbox" type="checkbox" value="#"
-                        class="ms-72 w-4 h-4 text-black  border-none rounded-full focus:ring-0">
-                </div>
-            </div>
-            <div class="mx-4 mt-6">
-                <p class="font-poppins font-medium text-2xl">A</p>
-                <div class="flex items-center mb-4 mt-5">
-                    <label for="default-checkbox" class=" text-2xl font-light text-gray-900 ">Ayam</label>
-                    <input id="default-checkbox" type="checkbox" value="#"
-                        class="ms-72 w-4 h-4 text-black  border-none rounded-full focus:ring-0">
-                </div>
-            </div>
+            @endforeach
+
         </div>
     </main>
     <div class="bg-white w-full h-28 fixed bottom-4">

@@ -12,7 +12,7 @@
     </nav>
 
     <main class="relative z-10" x-data="{ showModal: {{ session('login_failed') ? 'true' : 'false' }} }">
-        <div 
+        <div
             class="mx-auto mt-20 md:mt-2 sm:px-6 lg:px-8 block max-w-sm p-0 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
             <div class="flex min-h-full flex-col justify-center px-6 lg:px-8 sm:py-6 lg:py-1 ">
                 <div class="sm:mx-auto sm:w-full sm:max-w-sm ">
@@ -51,7 +51,7 @@
                             </div>
                         </div>
                         <div>
-                            <button type="submit" 
+                            <button type="submit"
                                 class="flex w-full h-10 justify-center text-white bg-[#FBBC05] rounded bg-gradient-to-r px-4 py-2 font-poppins font-normal leading-6 shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2">Masuk</button>
                         </div>
                         <div class="flex justify-between mt-3">
@@ -69,19 +69,15 @@
                         <span class="text-gray-500">atau</span>
                         <div class="border-t border-gray-400 w-36 md:w-28"></div>
                     </div>
-                    <div class="flex justify-center my-8 ">
-                        <div
+                    <div class="flex justify-center my-8">
+                        <a href="{{ route('google.redirectToGoogle') }}"
                             class="block mr-10 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-70">
                             <img class="p-2" src="{{ asset('images/google.svg') }}" alt="">
-                        </div>
-                        <div
-                            class="block mr-10 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-70">
+                        </a>
+                        <a href="{{ route('facebook.redirectToFacebook') }}"
+                            class="block  bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-70">
                             <img class="p-2" src="{{ asset('images/facebook.svg') }}" alt="">
-                        </div>
-                        <div
-                            class="block bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-70">
-                            <img class="p-2" src="{{ asset('images/whatapps.svg') }}" alt="">
-                        </div>
+                        </a>                        
                     </div>
                 </div>
             </div>

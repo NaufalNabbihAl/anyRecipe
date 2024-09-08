@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Models\Ingredients;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -17,7 +18,8 @@ class UserController extends Controller
     }
     public function search()
     {
-        return view('user.search');
+        $ingredients = Ingredients::orderBy('name')->get();
+        return view('user.search',compact('ingredients'));
     }
     public function selected()
     {
@@ -34,7 +36,13 @@ class UserController extends Controller
 
     public function setting()
     {
-        return view('user.setting');
+        $user = auth()->user();
+        return view('user.setting', compact('user'));
+    }
+    public function deleteUser($id)
+    {
+        User::destroy($id);
+        return redirect()->route('home');
     }
 
     public function changeNamePassword()

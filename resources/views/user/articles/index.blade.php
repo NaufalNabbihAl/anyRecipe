@@ -16,7 +16,7 @@
                     </a>
                 </div>
             </div>
-            <div class="bg-white pt-2">
+            <div class="bg-white pt-2 pb-2">
                 <form class="mx-4 ">
                     <label for="default-search"
                         class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
@@ -28,7 +28,7 @@
                                     stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                             </svg>
                         </div>
-                        <div class="flex" >
+                        <div class="flex">
                             <input type="search" id="default-search"
                                 class="block h-12 w-72 p-1 ps-10 text-sm text-gray-900 border-none focus:border-transparent focus:outline-none focus:ring-0  rounded-md bg-gray-100 "
                                 placeholder="Search Mockups, Logos..." required />
@@ -118,73 +118,77 @@
                 </form>
             </div>
         </nav>
-
-        <main class="pt-36">
+        <main class="pt-44 pb-10">
             <div class="mx-auto md:mt-2 lg:px-8 block max-w-sm">
                 <div class="w-auto px-1">
-                    <div class="flex justify-between" x-show="kolom2">
-                        <div class="relative">
-                            <button>
-                                <img src="http://127.0.0.1:8000/images/bookmark.svg"
-                                    class="absolute top-6 right-1 w-8 h-8 " alt="">
-                            </button>
-                            <div>
-                                <img src="http://127.0.0.1:8000/images/indomieSpecial.svg" alt="">
-                            </div>
-                            <p class="font-poppins font-medium text-lg ">Indomie spesial rasa kari kambing</p>
-                            <div class="flex items-center">
-                                <p class="font-poppins font-normal text-base text-gray-400">20</p>
-                                <p class="font-poppins font-thin text-base    text-gray-400 ms-2">dibaca</p>
-                            </div>
-                        </div>
-                        <div class="relative ms-3">
-                            <button>
-                                <img src="http://127.0.0.1:8000/images/bookmark.svg"
-                                    class="absolute top-6 right-1 w-8 h-8" alt="">
-                            </button>
-                            <div>
-                                <img src="http://127.0.0.1:8000/images/indomieSpecial.svg" alt="">
-                            </div>
-                            <p class="font-poppins font-medium text-lg ">Indomie spesial rasa kari kambing</p>
-                            <div class="flex items-center">
-                                <p class="font-poppins font-normal text-base text-gray-400">20</p>
-                                <p class="font-poppins font-thin text-base    text-gray-400 ms-2">dibaca</p>
-                            </div>
-                        </div>
+                    <div class="flex justify-between flex-wrap" x-show="kolom2">
+                        @php
+                            $counter = 0;
+                        @endphp
+                        @foreach ($articles as $a)
+                            @if ($counter % 2 == 0)
+                                <div class="flex space-x-4 mb-4">
+                            @endif
+                            <a href="{{ route('articles.show',[$a->id]) }}" class="relative flex flex-col w-1/2">
+                                <div class="relative">
+                                    <button class="absolute top-2 right-2"> <!-- Adjust right and top positioning -->
+                                        <img src="http://127.0.0.1:8000/images/bookmark.svg" class="w-8 h-8"
+                                            alt="">
+                                    </button>
+                                    <img src="{{ URL::asset('storage/' . $a->image) }}" alt=""
+                                        class="w-full h-32 object-cover rounded-md">
+                                </div>
+                                <p class="font-poppins font-medium text-lg">
+                                    @php
+                                        $titleWords = explode(' ', $a->title);
+                                        $titleSnippet = implode(' ', array_slice($titleWords, 0, 4));
+                                    @endphp
+                                    {{ $titleSnippet }}{{ count($titleWords) > 4 ? '...' : '' }}
+                                </p>
+                                <div class="flex items-center">
+                                    <p class="font-poppins font-normal text-base text-gray-400">20</p>
+                                    <p class="font-poppins font-thin text-base text-gray-400 ms-2">dibaca</p>
+                                </div>
+                            </a>
+                            @php
+                                $counter++;
+                            @endphp
+
+                            @if ($counter % 2 == 0)
                     </div>
-                    <div class="flex flex-col justify-between" x-show="kolom1">
-                        <div class="relative">
-                            <button>
-                                <img src="http://127.0.0.1:8000/images/bookmark.svg"
-                                    class="absolute top-6 right-1 w-8 h-8 " alt="">
-                            </button>
-                            <div>
-                                <img src="http://127.0.0.1:8000/images/indomieSpecial.svg" alt="">
-                            </div>
-                            <p class="font-poppins font-medium text-lg ">Indomie spesial rasa kari kambing</p>
-                            <div class="flex items-center">
-                                <p class="font-poppins font-normal text-base text-gray-400">20</p>
-                                <p class="font-poppins font-thin text-base    text-gray-400 ms-2">dibaca</p>
-                            </div>
-                        </div>
-                        <div class="relative ms-3">
-                            <button>
-                                <img src="http://127.0.0.1:8000/images/bookmark.svg"
-                                    class="absolute top-6 right-1 w-8 h-8" alt="">
-                            </button>
-                            <div>
-                                <img src="http://127.0.0.1:8000/images/indomieSpecial.svg" alt="">
-                            </div>
-                            <p class="font-poppins font-medium text-lg ">Indomie spesial rasa kari kambing</p>
-                            <div class="flex items-center">
-                                <p class="font-poppins font-normal text-base text-gray-400">20</p>
-                                <p class="font-poppins font-thin text-base    text-gray-400 ms-2">dibaca</p>
-                            </div>
-                        </div>
-                    </div>
+                    @endif
+                    @endforeach
+                    @if ($counter % 2 != 0)
                 </div>
+                @endif
             </div>
-        </main>
+    </div>
+
+    <div class="flex flex-col justify-between" x-show="kolom1">
+        @foreach ($articles as $a)
+            <a href="" class="relative mb-4">
+                <button class="absolute top-2 right-2">
+                    <img src="http://127.0.0.1:8000/images/bookmark.svg" class="w-8 h-8" alt="">
+                </button>
+                <div>
+                    <img src="{{ URL::asset('storage/' . $a->image) }}" alt=""
+                        class="w-full h-32 object-cover rounded-md">
+                </div>
+                <p class="font-poppins font-medium text-lg">
+                    @php
+                        $titleWords = explode(' ', $a->title);
+                        $titleSnippet = implode(' ', array_slice($titleWords, 0, 4));
+                    @endphp
+                    {{ $titleSnippet }}{{ count($titleWords) > 4 ? '...' : '' }}
+                </p>
+                <div class="flex items-center">
+                    <p class="font-poppins font-normal text-base text-gray-400">20</p>
+                    <p class="font-poppins font-thin text-base text-gray-400 ms-2">dibaca</p>
+                </div>
+            </a>
+        @endforeach
+    </div>
+    </main>
     </div>
     <x-footer></x-footer>
 </x-layout>

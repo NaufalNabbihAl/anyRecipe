@@ -21,7 +21,12 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
     ];
+
+    public function recipe(){
+        return $this->hasMany(Recipe::class);
+    }
 
 
     /**
