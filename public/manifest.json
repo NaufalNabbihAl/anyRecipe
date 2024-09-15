@@ -1,0 +1,37 @@
+{
+  "public/font/AldoPro-Bold.woff": {
+    "file": "assets/AldoPro-Bold-Cgkf5ySp.woff",
+    "src": "public/font/AldoPro-Bold.woff"
+  },
+  "public/font/AldoPro-Bold.woff2": {
+    "file": "assets/AldoPro-Bold-C0cLZp-B.woff2",
+    "src": "public/font/AldoPro-Bold.woff2"
+  },
+  "public/font/AldoPro-Book.woff": {
+    "file": "assets/AldoPro-Book-CyWKAHSy.woff",
+    "src": "public/font/AldoPro-Book.woff"
+  },
+  "public/font/AldoPro-Book.woff2": {
+    "file": "assets/AldoPro-Book-DBvqN9CJ.woff2",
+    "src": "public/font/AldoPro-Book.woff2"
+  },
+  "public/font/AldoPro-Medium.woff": {
+    "file": "assets/AldoPro-Medium-BEp0Z9sQ.woff",
+    "src": "public/font/AldoPro-Medium.woff"
+  },
+  "public/font/AldoPro-Medium.woff2": {
+    "file": "assets/AldoPro-Medium-BEGTbzbW.woff2",
+    "src": "public/font/AldoPro-Medium.woff2"
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-BQ5vMd0D.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-DdQ1e7RN.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  }
+}

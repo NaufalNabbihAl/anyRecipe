@@ -2,9 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Ingredients;
+use App\Models\Articles;
 use App\Models\User;
+use App\Models\Recipe;
+use App\Models\Category;
+use App\Models\Ingredients;
+use App\Models\RecipeIngredients;
+use App\Models\Step;
+use GuzzleHttp\Promise\Create;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -14,24 +21,47 @@ class UserController extends Controller
     }
     public function dashboard()
     {
-        return view('user.dashboard');
+        $recipes = session('recipes');
+        $randomRecipes = Recipe::inRandomOrder()->limit(2)->get();
+        $articles = Articles::orderBy('created_at', 'desc')->limit(2)->get();
+        return view('user.dashboard', compact('recipes', 'randomRecipes', 'articles'));
     }
     public function search()
     {
         $ingredients = Ingredients::orderBy('name')->get();
-        return view('user.search',compact('ingredients'));
+        return view('user.search', compact('ingredients'));
     }
-    public function selected()
+    public function selected(Request $request)
     {
-        return view('user.selected');
+        $request->validate([
+            'ingredients' => 'required|array|min:1|max:5',
+            'ingredients.*' => 'exists:ingredients,id',
+        ]);
+        $selectedIngredientsIds = $request->input('ingredients');
+
+        $selectedIngredients = Ingredients::whereIn('id', $selectedIngredientsIds)->get();
+
+        return view('user.selected', compact('selectedIngredients'));
     }
-    public function found()
+    public function found(Request $request)
     {
-        return view('user.found');
+        $ingredientIds = $request->input('ingredient');
+
+        
+        $recipes = Recipe::whereHas('recipeIngredients', function ($query) use ($ingredientIds) {
+            $query->whereIn('ingredient_id', $ingredientIds); // Cari resep yang memiliki salah satu bahan
+        })->get();
+
+        return view('user.found', compact('recipes'));
     }
+
+
+
     public function upload()
     {
-        return view('user.upload');
+        $categories = Category::orderBy('name')->get();
+        $ingredients = Ingredients::orderBy('name')->get();
+        return view('user.upload', compact('ingredients', 'categories'));
     }
 
     public function setting()
@@ -47,6 +77,110 @@ class UserController extends Controller
 
     public function changeNamePassword()
     {
-        return view('user.changeNamePassword');
+        $user = auth()->user();
+        return view('user.changeNamePassword', compact('user'));
+    }
+
+    public function changeNamePasswordStore(Request $request)
+    {
+        $request->validate([
+            'name' => 'nullable|string|max:255',
+            'old_password' => 'required|string',
+            'password' => 'required|string',
+        ]);
+
+        $user = auth()->user();
+
+
+        if (!Hash::check($request->old_password, $user->password)) {
+            return back()->withErrors(['old_password' => 'Password lama tidak sesuai']);
+        }
+
+
+        if ($request->filled('name')) {
+            $user->name = $request->name;
+        }
+
+
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        return redirect()->route('user.setting')->with('success', 'Data berhasil diubah');
+    }
+
+    public function selectRecipebyIngredients(Request $request)
+    {
+        $idIngredients = Ingredients::where('name', 'like', '%' . $request->ingredients . '%')->first();
+
+        $idCategory = Category::where('name', 'like', '%' . $request->food . '%')->first();
+
+        if (!$idIngredients || !$idCategory) {
+            $recipes = [];
+        } else {
+            $recipes = Category::find($idCategory->id)
+                ->recipes()
+                ->whereDoesntHave('recipeIngredients', function ($query) use ($idIngredients) {
+                    $query->where('ingredient_id', $idIngredients->id);
+                })
+                ->limit(2)
+                ->get();
+        }
+        session(['recipes' => $recipes]);
+
+        return redirect()->route('user.dashboard');
+    }
+
+    public function showRecipe($id)
+    {
+        $recipe = Recipe::find($id);
+        return view('user.showRecipe', compact('recipe'));
+    }
+
+    public function uploadStore(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'hours' => 'nullable|numeric',
+            'minutes' => 'nullable|numeric',
+            'seconds' => 'nullable|numeric',
+            'category' => 'required|string',
+            'ingredients' => 'required|array',
+            'ingredients.*' => 'exists:ingredients,id',
+            'steps' => 'required|array',
+            'steps.*' => 'string',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $imageName = time() . '.' . $request->image->extension();
+        $request->image->move(public_path('storage/recipe'), $imageName);
+
+
+        $recipe = Recipe::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'image' => $imageName,
+            'hours' => $request->hours,
+            'minutes' => $request->minutes,
+            'seconds' => $request->seconds,
+            'category_id' => $request->category,
+            'user_id' => auth()->user()->id,
+        ]);
+        $recipe->save();
+        $idrecipe = $recipe->id;
+        foreach ($request->ingredients as $key => $ingredient) {
+            $data = new RecipeIngredients();
+            $data->recipe_id = $idrecipe;
+            $data->ingredient_id = $ingredient;
+            $data->quantity = $request->quantity[$key];
+            $data->save();
+        }
+        foreach ($request->steps as $key => $step) {
+            $data = new Step();
+            $data->recipe_id = $idrecipe;
+            $data->description = $step;
+            $data->save();
+        }
+        return redirect()->route('user.dashboard')->with('success', 'Resep berhasil diupload');
     }
 }

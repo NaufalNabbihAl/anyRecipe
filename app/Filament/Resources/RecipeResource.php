@@ -8,14 +8,12 @@ use App\Models\Recipe;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
-use Filament\Resources\Pages\Page;
-use Illuminate\Database\Eloquent\Builder;
-use Filament\Resources\Pages\CreateRecord;
-use Illuminate\Validation\ValidationException;
-use App\Filament\Resources\RecipeResource\Pages;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\RecipeResource\RelationManagers;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\TextInput;
+
+use App\Filament\Resources\RecipeResource\Pages;
+
 
 class RecipeResource extends Resource
 {
@@ -30,6 +28,9 @@ class RecipeResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
+                Select::make('category_id')
+                    ->relationship('category', 'name')
+                    ->required(),
                 Forms\Components\Textarea::make('description')
                     ->required()
                     ->maxLength(255)
@@ -56,23 +57,36 @@ class RecipeResource extends Resource
                     ->numeric()
                     ->maxValue(24),
                 Forms\Components\TextInput::make('minutes')
-                    ->nullable()                    
+                    ->nullable()
                     ->numeric()
-                    ->maxValue(60)
-                    ->default(0)
-                    ,
+                    ->maxValue(60),
                 Forms\Components\TextInput::make('seconds')
-                    ->nullable()                    
+                    ->nullable()
                     ->numeric()
-                    ->maxValue(60)
-                    ->default(0),
+                    ->maxValue(60),
                 Repeater::make('ingredients')
-                    ->addButtonLabel('Add Ingredient')
+                    ->relationship('recipeIngredients')
                     ->schema([
-                        Forms\Components\TextInput::make('name')
-                            ->required()
-                            ->maxLength(255),
-                    ]),
+                        Select::make('ingredient_id')
+                            ->relationship('ingredient', 'name')
+                            ->searchable()
+                            ->reactive()
+                            ->required(),
+                        TextInput::make('quantity')
+                            ->required(),
+                    ])
+                    ->minItems(1)
+                    ->columns(2)
+                    ->addActionLabel('Add Ingredient'),
+                Repeater::make('steps')
+                    ->relationship('steps')
+                    ->schema([
+                        Forms\Components\Textarea::make('description')
+                            ->required(),
+                    ])
+                    ->minItems(1)
+                    ->columns(1)
+                    ->addActionLabel('Add Step'),
             ]);
     }
 
@@ -86,14 +100,12 @@ class RecipeResource extends Resource
                 Tables\Columns\TextColumn::make('description')
                     ->searchable()
                     ->sortable()
-                    ->words(10)
-                    ,
+                    ->words(10),
                 Tables\Columns\ImageColumn::make('image')
+                
                     ->square()
                     ->searchable()
                     ->sortable(),
-                
-                
             ])
             ->filters([
                 //

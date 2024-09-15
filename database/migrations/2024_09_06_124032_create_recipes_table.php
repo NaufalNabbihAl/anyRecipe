@@ -17,9 +17,12 @@ return new class extends Migration
             $table->string('image');
             $table->text('description');
             $table->foreignId('user_id')->constrained();
-            $table->integer('hours');
-            $table->integer('minutes');
-            $table->integer('second');
+            $table->integer('hours')->nullable();
+            $table->integer('minutes')->nullable();
+            $table->integer('seconds')->nullable();
+            // $table->foreignId('category_id')->constrained();
+            $table->unsignedBigInteger('category_id');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->timestamps();
         });
     }

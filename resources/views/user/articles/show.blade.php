@@ -16,7 +16,7 @@
             </div>
         </div>
     </nav>
-    <main class="pt-28">
+    <main class="pt-28 pb-16">
         <div class="mx-auto md:mt-2 lg:px-8 block max-w-sm">
             <div class="w-auto px-1">
                 <h1 class="font-poppins font-semibold text-2xl">{{ $articles->title }}</h1>

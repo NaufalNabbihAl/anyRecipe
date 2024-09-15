@@ -100,14 +100,10 @@
                             class="block mr-10 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-70">
                             <img class="p-2" src="{{ asset('images/google.svg') }}" alt="">
                         </a>
-                        <div
+                        <a href="{{ route('facebook.redirectToFacebook') }}"
                             class="block mr-10 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-70">
                             <img class="p-2" src="{{ asset('images/facebook.svg') }}" alt="">
-                        </div>
-                        <div
-                            class="block bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-70">
-                            <img class="p-2" src="{{ asset('images/whatapps.svg') }}" alt="">
-                        </div>
+                        </a>
                     </div>
                 </div>
             </div>

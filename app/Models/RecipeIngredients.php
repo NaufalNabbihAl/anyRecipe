@@ -9,8 +9,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class RecipeIngredients extends Model
 {
     use HasFactory;
-
-    
     protected $fillable = ['recipe_id', 'ingredient_id', 'quantity'];
 
     public function recipe(): BelongsTo
@@ -20,6 +18,6 @@ class RecipeIngredients extends Model
 
     public function ingredient(): BelongsTo
     {
-        return $this->belongsTo(Ingredients::class);
+        return $this->belongsTo(Ingredients::class, 'ingredient_id', 'id');
     }
 }

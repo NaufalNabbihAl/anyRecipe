@@ -22,9 +22,8 @@ class AuthController extends Controller
     public function loginAuth(Request $request)
     {
         $credentials = $request->only('name', 'password');
-
         if (Auth::attempt($credentials)) {
-            return redirect()->route('user.dashboard');
+            return redirect()->route('user.previous');
         } else {
             return redirect()->route('auth.login')->with('login_failed', true);
         }
@@ -68,7 +67,7 @@ class AuthController extends Controller
         $user = User::where('email', $input)->first();
         if ($user) {
             $user->notify(new ResetPasswordNotification());
-            session()->put('email', $input);  // Menyimpan email dalam sesi
+            session()->put('email', $input);  
             return redirect()->route('auth.otp');
         }
         return redirect()->back()->withErrors(['email' => 'Email not found']);

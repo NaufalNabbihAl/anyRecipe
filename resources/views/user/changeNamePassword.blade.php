@@ -16,60 +16,68 @@
             </div>
         </div>
     </nav>
-    <main class="pt-24 " ">
+
+
+    //show error
+
+
+    <main class="pt-24 ">
+
+        @if ($errors->any())
+            <div class="bg-red-500 p-4 rounded-lg mb-6 text-red text-center">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <div class="mx-auto pb-20">
-            <div class="w-auto h-60 bg-gradient-to-t from-gray-500 to-gray-300 flex flex-col items-center justify-center">
+            <div
+                class="w-auto h-60 bg-gradient-to-t from-gray-500 to-gray-300 flex flex-col items-center justify-center">
                 <img src="{{ asset('images/circleSetting.png') }}" alt="">
-                <p class="font-poppins font-thin text-[#F6F6F6]">@xavxav</p>
-                <h1 class="font-poppins font-semibold text-[#F6F6F6]">Xaviera Valentino Rossi</h1>
+                <h1 class="font-poppins font-semibold text-[#F6F6F6]">{{ $user->name }}</h1>
             </div>
             <div class="bg-gray-200 ">
                 <p class="font-poppins font-semibold text-base text-gray-500 ms-4 pt-5 pb-2">Ganti Nama & Username</p>
                 <div class="bg-gray-100">
-                    <form action="">
+                    <form action="{{ route('user.changeNamePasswordStore') }}" method="POST">
+                        @csrf
+                        @method('POST')
                         <div class="flex">
                             <div
                                 class="p-3 text-gray-400 font-poppins border-b-0 w-12 text-center bg-white border-gray-600 font-thin    focus:text-[#3d3d3d]">
                                 <img src="{{ asset('images/user.svg') }}" alt="">
                             </div>
-                            <input type="text" name="" placeholder="Tulis judul makanan"
+                            <input type="text" name="name" placeholder="Tulis judul makanan"
+                                value="{{ $user->name }}"
                                 class="p-3 text-gray-400  font-poppins font-thin w-full border-l-0 border-t-0 border-r-0 border-b-0 focus:ring-gray-500 focus:outline-1 focus:border-gray-500 focus:text-[#3d3d3d]">
                         </div>
-                        <div class="flex">
-                            <div
-                                class="p-3 text-gray-400 font-poppins border-b-0 w-12 text-center bg-white border-gray-600 font-thin    focus:text-[#3d3d3d]">
-                                <img src="{{ asset('images/@.svg') }}" alt="">
-                            </div>
-                            <input type="text" name="" placeholder="Tulis judul makanan"
-                                class="p-3 text-gray-400  font-poppins font-thin w-full border-l-0 border-t-0 border-r-0 border-b-0 focus:ring-gray-500 focus:outline-1 focus:border-gray-500 focus:text-[#3d3d3d]">
-                        </div>
-                        <p class="font-poppins font-semibold text-base text-gray-500 ms-4 pt-5 pb-2">Ganti Kata Sandi</p>
+
+                        <p class="font-poppins font-semibold text-base text-gray-500 ms-4 pt-5 pb-2">Ganti Kata Sandi
+                        </p>
                         <div class="relative" x-data="{ showPassword: false }">
-                            <input :type="showPassword ? 'text' : 'password'" id="password" name="password"
+                            <input :type="showPassword ? 'text' : 'password'" id="old_password" name="old_password"
                                 placeholder="Kata sandi lama" autocomplete="current-password" required
                                 class="block font-poppins font-extralight w-full flex-1 h-12 bg-white border-t-0 border-l-0 border-r-0 border-b-0 text-gray-500 shadow-sm  placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6 pl-[58px]">
                             <span @click="showPassword = !showPassword"
                                 class="absolute  inset-y-0 right-0 pr-3 flex items-center cursor-pointer">
-                                <i :class="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"
-                                    class="text-gray-500"></i>
+                                <i :class="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'" class="text-gray-500"></i>
                             </span>
                             <span class="absolute inset-y-0 left-0 flex items-center pl-3">
-                                <img src="{{ asset('images/lock.svg') }}" class="h-4 w-4 text-gray-500"
-                                    alt="Icon User">
+                                <img src="{{ asset('images/lock.svg') }}" class="h-4 w-4 text-gray-500" alt="Icon User">
                             </span>
                         </div>
                         <div class="relative" x-data="{ showPassword: false }">
                             <input :type="showPassword ? 'text' : 'password'" id="password" name="password"
                                 placeholder="Kata sandi baru" autocomplete="current-password" required
-                                class="block font-poppins font-extralight w-full flex-1 h-12 bg-white border-t-0 border-l-0 border-r-0 border-b-0 text-gray-500 shadow-sm  placeholder:text-gray-500 focus:ring-2 focus:ring-inset  focus:ring-black pl-[58px]">
+                                class="block font-poppins font-extralight w-full flex-1 h-12 bg-white border-t-0 border-l-0 border-r-0 border-b-0 text-gray-500 shadow-sm  placeholder:text-gray-500 focus:ring-2 focus:ring-inset sm:text-sm  focus:ring-black pl-[58px]">
                             <span @click="showPassword = !showPassword"
                                 class="absolute  inset-y-0 right-0 pr-3 flex items-center cursor-pointer">
-                                <i :class="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"
-                                    class="text-gray-500"></i>
+                                <i :class="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'" class="text-gray-500"></i>
                             </span>
                             <span class="absolute inset-y-0 left-0 flex items-center pl-3">
-                                <img src="{{ asset('images/lock.svg') }}" class="h-4 w-4 text-gray-500"
-                                    alt="Icon User">
+                                <img src="{{ asset('images/lock.svg') }}" class="h-4 w-4 text-gray-500" alt="Icon User">
                             </span>
                         </div>
                         <div class="w-full flex justify-center">
@@ -78,7 +86,7 @@
                         </div>
                     </form>
                 </div>
-                
+
             </div>
         </div>
     </main>

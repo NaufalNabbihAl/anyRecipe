@@ -1,9 +1,8 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-input[type="password"]::-ms-reveal, 
+input[type="password"]::-ms-reveal,
 input[type="password"]::-ms-clear {
     display: none;
 }
@@ -14,35 +13,35 @@ input[type="password"]::-webkit-textfield-decoration-container {
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 /* Firefox */
-input[type=number] {
-  -moz-appearance: textfield;
+input[type="number"] {
+    -moz-appearance: textfield;
 }
 
 @font-face {
-    font-family: 'Aldo Pro Book';
-    src: url('../../public/font/AldoPro-Book.woff') format('woff'),
-        url('../../public/font/AldoPro-Book.woff2') format('woff2');
+    font-family: "Aldo Pro Book";
+    src: url("../../public/font/AldoPro-Book.woff") format("woff"),
+        url("../../public/font/AldoPro-Book.woff2") format("woff2");
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
-    font-family: 'Aldo Pro Book';
-    src: url('../../public/font/AldoPro-Bold.woff') format('woff'),
-        url('../../public/font/AldoPro-Bold.woff2') format('woff2');
+    font-family: "Aldo Pro Book";
+    src: url("../../public/font/AldoPro-Bold.woff") format("woff"),
+        url("../../public/font/AldoPro-Bold.woff2") format("woff2");
     font-weight: bold;
     font-style: normal;
 }
 
 @font-face {
-    font-family: 'Aldo Pro Book';
-    src: url('../../public/font/AldoPro-Medium.woff') format('woff'),
-        url('../../public/font/AldoPro-Medium.woff2') format('woff2');
+    font-family: "Aldo Pro Book";
+    src: url("../../public/font/AldoPro-Medium.woff") format("woff"),
+        url("../../public/font/AldoPro-Medium.woff2") format("woff2");
     font-weight: 500;
     font-style: normal;
 }
@@ -54,29 +53,31 @@ input[type=number] {
     background-clip: text;
     -webkit-background-clip: text;
     transition: background-image 0.3s ease, -webkit-text-fill-color 0.3s ease;
-  }
-  
-  .text-gradient:hover {
-    background-image: linear-gradient(to right, #FD666D, #FBBC05);
-    -webkit-text-fill-color: transparent;
-  }
-  
-  .text-gradient-text {
-    transition: background-image 0.3s ease, -webkit-text-fill-color 0.3s ease;
-  }
-  
-  .text-gradient-text:hover {
-    background-image: linear-gradient(to right, #FD666D, #FBBC05);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-  
-  .icon path {
-    transition: fill 0.3s ease;
 }
 
+.text-gradient:hover {
+    background-image: linear-gradient(to right, #fd666d, #fbbc05);
+    -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-text {
+    transition: background-image 0.3s ease, -webkit-text-fill-color 0.3s ease;
+}
+
+.text-gradient-text:hover {
+    background-image: linear-gradient(to right, #fd666d, #fbbc05);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.icon path {
+    transition: fill 0.3s ease;
+}
 
 .group:hover .icon path {
     fill: url(#grad-hover);
 }
-  
+
+.selected-button {
+    border-color: #fbbc05;
+}

@@ -20,8 +20,8 @@
         <div class="mx-auto pb-20">
             <div class="w-auto h-60 bg-gradient-to-t from-gray-500 to-gray-300 flex flex-col items-center justify-center">
                 <img src="{{ asset('images/circleSetting.png') }}" alt="">
-                <p class="font-poppins font-thin text-[#F6F6F6] ">@xavxav</p>
-                <h1 class="font-poppins font-semibold text-[#F6F6F6]">Xaviera Valentino Rossi</h1>
+                <p class="font-poppins font-thin text-[#F6F6F6] ">@ {{ $user->name }}</p>
+                <h1 class="font-poppins font-semibold text-[#F6F6F6]">{{ $user->name }}</h1>
             </div>
             <div class="bg-[#3D3D3D] flex justify-between px-5">
                 <p class="font-medium font-poppins text-lg text-white  py-4">
@@ -134,16 +134,15 @@
                 </svg>
             </div>
         </a>
-        <form action="{{ route('user.deleteUser', $user->id) }}" method="POST" class="inline-block">
+        <form action="{{ route('user.deleteUser', $user->id) }}" method="POST">
             @csrf
             @method('DELETE')
-
-            <button type="submit" class="flex px-5 py-2 items-center justify-between">
+            <button type="submit" class="flex px-5 py-2 items-center justify-between w-full">
                 <div class="flex py-3">
                     <img src="{{ asset('images/trash.svg') }}" alt="">
                     <p class="font-poppins font-medium text-lg ps-5">Hapus Akun</p>
                 </div>
-                <div class="rounded-full bg-gray-200 w-4 h-4 flex items-center justify-center">
+                <div class="rounded-full bg-gray-200 w-4 h-4 flex items-center justify-center ">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                         stroke="currentColor" class="size-3">
                         <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />

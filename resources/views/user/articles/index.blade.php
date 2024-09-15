@@ -129,7 +129,7 @@
                             @if ($counter % 2 == 0)
                                 <div class="flex space-x-4 mb-4">
                             @endif
-                            <a href="{{ route('articles.show',[$a->id]) }}" class="relative flex flex-col w-1/2">
+                            <a href="{{ route('articles.show', [$a->id]) }}" class="relative flex flex-col w-1/2">
                                 <div class="relative">
                                     <button class="absolute top-2 right-2"> <!-- Adjust right and top positioning -->
                                         <img src="http://127.0.0.1:8000/images/bookmark.svg" class="w-8 h-8"
@@ -166,7 +166,7 @@
 
     <div class="flex flex-col justify-between" x-show="kolom1">
         @foreach ($articles as $a)
-            <a href="" class="relative mb-4">
+            <a href="{{ route('articles.show', [$a->id]) }}" class="relative mb-4">
                 <button class="absolute top-2 right-2">
                     <img src="http://127.0.0.1:8000/images/bookmark.svg" class="w-8 h-8" alt="">
                 </button>

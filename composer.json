@@ -7,6 +7,7 @@
     "require": {
         "php": "^8.1",
         "filament/filament": "^3.2",
+        "google/apiclient": "^2.17",
         "guzzlehttp/guzzle": "^7.2",
         "ichtrojan/laravel-otp": "^2.0",
         "laravel/framework": "^10.10",
@@ -16,7 +17,7 @@
         "mohamedsabil83/filament-forms-tinyeditor": "^2.3"
     },
     "require-dev": {
-        "fakerphp/faker": "^1.9.1",
+        "fakerphp/faker": "^1.23",
         "laravel/pint": "^1.0",
         "laravel/sail": "^1.18",
         "mockery/mockery": "^1.4.4",
@@ -29,7 +30,10 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "classmap": [
+            "database/migrations"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
