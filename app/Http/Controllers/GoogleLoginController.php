@@ -13,7 +13,7 @@ class GoogleLoginController extends Controller
 {
     public function redirectToGoogle()
     {
-        return Socialite::driver('google')->redirect();
+        return Socialite::driver('google') ->scopes(['profile', 'email'])->redirect();
     }
     public function handleGoogleCallback()
     {
@@ -30,9 +30,13 @@ class GoogleLoginController extends Controller
                 ]);
             }
 
-            Auth::login($user);
+            $credentials = Auth::login($user);
 
-            return redirect('/previous');
+            if (Auth::attempt($credentials) && auth()->user()->category == null && auth()->user()->ingredients == null) {
+                return redirect()->route('user.previous');
+            } else if (Auth::attempt($credentials)) {
+                return redirect()->route('user.dashboard');
+            }
         } catch (\Exception $e) {
             
             return redirect('/login')->withErrors(['message' => 'Login failed or was cancelled. Please try again.']);

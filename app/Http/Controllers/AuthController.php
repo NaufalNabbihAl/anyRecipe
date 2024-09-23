@@ -22,9 +22,11 @@ class AuthController extends Controller
     public function loginAuth(Request $request)
     {
         $credentials = $request->only('name', 'password');
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials) && auth()->user()->category == null && auth()->user()->ingredients == null) {
             return redirect()->route('user.previous');
-        } else {
+        } else if (Auth::attempt($credentials)) {
+            return redirect()->route('user.dashboard');  
+        } else{
             return redirect()->route('auth.login')->with('login_failed', true);
         }
     }

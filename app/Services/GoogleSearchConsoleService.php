@@ -15,18 +15,9 @@ class GoogleSearchConsoleService
         $this->client = new Google_Client();
         $this->client->setAuthConfig(storage_path('app/google/client_secret.json')); // Path to your service account credentials
         $this->client->setScopes([
-            Google_Service_Webmasters::WEBMASTERS_READONLY]);
+            Google_Service_Webmasters::WEBMASTERS_READONLY
+        ]);
         $this->client->setSubject('admin-local@localproject-435617.iam.gserviceaccount.com'); // Service account email
-
-
-        // $this->client->setScopes([
-        //     'https://www.googleapis.com/auth/webmasters.readonly',  // Readonly
-        // ]),
-        
-        // $this->client->setScopes([
-        //     'https://www.googleapis.com/auth/webmasters',  // Full access
-        // ])
-        // var_dump($this->client->getAccessToken());
     }
 
     public function getService()
@@ -43,6 +34,9 @@ class GoogleSearchConsoleService
     public function getSearchAnalytics($siteUrl, $startDate, $endDate)
     {
         $service = $this->getService();
+        $this->client->setScopes([
+            'https://www.googleapis.com/auth/webmasters'
+        ]);
         $request = new \Google_Service_Webmasters_SearchAnalyticsQueryRequest();
         $request->setStartDate($startDate);
         $request->setEndDate($endDate);

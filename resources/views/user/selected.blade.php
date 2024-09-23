@@ -3,7 +3,7 @@
         <div class="w-full h-8 bg-[#FBBC05]"></div>
         <div class="flex px-6 lg:px-8 h-16">
             <div class="flex item-center -ms-4 md:ms-0 md:justify-center justify-between w-full">
-                <a href="" class="text-white items-center mr-24 flex">
+                <a href="{{ route('user.search') }}" class="text-white items-center mr-24 flex">
                     <svg width="30" height="30" viewBox="0 0 30 30" fill="currentColor"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -19,24 +19,48 @@
         <div class="mx-auto md:mt-2 lg:px-8 block max-w-md">
             <ul class="item-list px-3" id="ingredient-list">
                 @if (isset($selectedIngredients) && $selectedIngredients->count() > 0)
-                    <form action="{{ route('user.found') }}" method="GET" class="inline">
+                    <form action="{{ route('user.found') }}" method="GET" class="inline" id="ingredient-form">
                         @foreach ($selectedIngredients as $ingredient)
                             <div class="flex items-center justify-between w-full ingredient-item"
                                 data-id="{{ $ingredient->id }}">
                                 <p class="font-poppins font-light text-2xl">{{ $ingredient->name }}</p>
                                 <input type="hidden" name="ingredient[]" value="{{ $ingredient->id }}">
                                 <button type="button" class="delete-btn font-poppins font-normal text-5xl"
-                                    onclick="removeIngredient({{ $ingredient->id }})">×</button>
+                                    data-id="{{ $ingredient->id }}">×</button>
                             </div>
                         @endforeach
-                    
+                    </form>
                 @else
                     <p>Tidak ada bahan yang dipilih.</p>
                 @endif
             </ul>
+            {{-- <p id="error-message" class="text-red-500 font-poppins font-normal mt-2 hidden">Kamu harus memilih bahan
+                makanan dulu</p> --}}
+
+            <div id="error-message" class="text-red-500 font-poppins font-normal mt-2 hidden">
+                <div
+                    class="mx-auto mt-20 md:mt-2 sm:px-6 lg:px-8 block max-w-sm p-0 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                    <div class="flex min-h-full flex-col justify-center px-6 lg:px-8 sm:py-6 lg:py-1 ">
+                        <div class="sm:mx-auto sm:w-full sm:max-w-sm mt-11 flex justify-center">
+                            <img src="{{ asset('images/dangerIcon.svg') }}" alt="DangerIcon">
+                        </div>
+                        <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+                            <h2
+                                class="mt-8 text-center text-2xl font-poppins font-semibold leading-9 tracking-tight text-[#3D3D3D]">
+                                Gagal Cari Resep
+                            </h2>
+                            <p class="text-center font-poppins font-normal ">Kamu harus memilih bahan
+                                makanan dulu</p>
+                        </div>
+                        <div class="mt-5 mb-5 flex text-center">
+                            <a href="{{ route('user.search') }}" class="w-full h-10 text-white bg-[#FBBC05] rounded py-2 px-2">Cari
+                                Bahan</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
-
     <div class="bg-white w-full h-28 fixed bottom-4">
         <div class="flex justify-between px-4">
             <div>
@@ -58,31 +82,54 @@
                 <p class="font-poppins font-medium text-xl ms-10" id="selected-count">0</p>
             </div>
             <div>
-                <button type="submit"
+                <button type="button" id="submit-button"
                     class="flex w-auto justify-center text-white bg-[#FBBC05] rounded-lg bg-gradient-to-r px-4 py-3 font-poppins font-normal leading-6 shadow-sm mt-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2">
                     Lanjutkan
                 </button>
-            </form>
             </div>
         </div>
     </div>
     <x-footer></x-footer>
     <script>
-        function updateSelectedCount() {
-            const ingredientCount = document.querySelectorAll('input[name="ingredient[]"]').length;
-            document.getElementById('selected-count').textContent = ingredientCount;
-        }
-
-        function removeIngredient(id) {
-            const ingredientItem = document.querySelector(`.ingredient-item[data-id="${id}"]`);
-            if (ingredientItem) {
-                ingredientItem.remove();
-                updateSelectedCount(); // Update count after removal
-            }
-        }
-
-        // Initial count update
         document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('ingredient-form');
+            const submitButton = document.getElementById('submit-button');
+            const errorMessage = document.getElementById('error-message');
+            const ingredientList = document.getElementById('ingredient-list');
+
+            function updateSelectedCount() {
+                const ingredientCount = document.querySelectorAll('input[name="ingredient[]"]').length;
+                document.getElementById('selected-count').textContent = ingredientCount;
+            }
+
+            function removeIngredient(id) {
+                const ingredientItem = document.querySelector(`.ingredient-item[data-id="${id}"]`);
+                if (ingredientItem) {
+                    ingredientItem.remove();
+                    updateSelectedCount();
+                }
+            }
+
+            // Add event delegation for delete buttons
+            ingredientList.addEventListener('click', function(e) {
+                if (e.target.classList.contains('delete-btn')) {
+                    const id = e.target.getAttribute('data-id');
+                    removeIngredient(id);
+                }
+            });
+
+            submitButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                const ingredients = ingredientList.querySelectorAll('input[name="ingredient[]"]');
+                if (ingredients.length === 0) {
+                    errorMessage.classList.remove('hidden');
+                } else {
+                    errorMessage.classList.add('hidden');
+                    form.submit();
+                }
+            });
+
+            // Initial count update
             updateSelectedCount();
         });
     </script>

@@ -23,7 +23,7 @@ class GoogleSearchConsoleController extends Controller
     public function getAnalytics(GoogleSearchConsoleService $searchConsoleService)
     {
         try {
-            $siteUrl = 'https://1228-114-10-46-110.ngrok-free.app'; // Replace with your actual site URL
+            $siteUrl = 'https://anyrecipe.id';
             $startDate = '2023-10-01';
             $endDate = '2023-10-26';
 
@@ -37,14 +37,34 @@ class GoogleSearchConsoleController extends Controller
         }
     }
 
+    public function showAnalyticsChart(Request $request)
+    {
+        $siteUrl = 'https://anyrecipe'; 
+        $startDate = $request->input('startDate', '2024-01-01'); // Default ke 1 Januari 2023
+        $endDate = $request->input('endDate', '2024-12-31'); // Default ke 31 Desember 2023
+
+        $analyticsData = $this->googleSearchConsoleService->getSearchAnalytics($siteUrl, $startDate, $endDate);
+
+        $dates = [];
+        $clicks = [];
+
+        foreach ($analyticsData->rows as $row) {
+            $dates[] = $row['keys'][0];  // Tanggal
+            $clicks[] = $row['clicks'];  // Klik
+        }
+
+        return view('search-console.analytics-chart', compact('dates', 'clicks'));
+    }
+
+
     public function getSearchAnalytics($siteUrl)
-{
-    $startDate = '2023-01-01';
-    $endDate = '2023-12-31';
-    $analyticsData = $this->googleSearchConsoleService->getSearchAnalytics($siteUrl, $startDate, $endDate);
-    return view('search-console.analytics', ['analyticsData' => $analyticsData]);
-}
-    
+    {
+        $startDate = '2023-01-01';
+        $endDate = '2023-12-31';
+        $analyticsData = $this->googleSearchConsoleService->getSearchAnalytics($siteUrl, $startDate, $endDate);
+        return view('search-console.analytics', ['analyticsData' => $analyticsData]);
+    }
+
 
     public function addSiteview()
     {

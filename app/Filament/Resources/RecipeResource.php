@@ -102,7 +102,6 @@ class RecipeResource extends Resource
                     ->sortable()
                     ->words(10),
                 Tables\Columns\ImageColumn::make('image')
-                
                     ->square()
                     ->searchable()
                     ->sortable(),

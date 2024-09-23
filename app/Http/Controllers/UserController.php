@@ -19,12 +19,51 @@ class UserController extends Controller
     {
         return view('user.previous');
     }
-    public function dashboard()
+    // public function dashboard()
+    // {
+    //     $recipes = session('recipes');
+    //     $randomRecipes = Recipe::inRandomOrder()->limit(2)->get();
+    //     $getRecipe = Recipe::orderBy('name')->get();
+    //     $articles = Articles::orderBy('created_at', 'desc')->limit(2)->get();
+    //     return view('user.dashboard', compact('recipes', 'randomRecipes', 'articles', 'getRecipe'));
+    // }
+    // public function dashboard(Request $request)
+    // {
+    //     $search = $request->input('search');
+
+    //     $recipes = Recipe::when($search, function ($query) use ($search) {
+    //         return $query->where('name', 'like', '%' . $search . '%');
+    //     })->orderBy('name')->paginate(10);
+
+    //     $randomRecipes = Recipe::inRandomOrder()->limit(2)->get();
+    //     $articles = Articles::orderBy('created_at', 'desc')->limit(2)->get();
+
+    //     return view('user.dashboard', compact('recipes', 'randomRecipes', 'articles', 'search'));
+    // }
+
+    public function dashboard(Request $request)
     {
-        $recipes = session('recipes');
+        $search = $request->input('search');
+
+        if ($search) {
+            // If there's a search query, use it to filter recipes
+            $recipes = Recipe::where('name', 'like', '%' . $search . '%')
+                ->orderBy('name')
+                ->paginate(10);
+
+            // Store search results in session
+            session(['recipes' => $recipes->items()]);
+        } else {
+            // If no search query, use recipes from session or fetch default ones
+            $recipes = session('recipes', function () {
+                return Recipe::orderBy('name')->limit(10)->get();
+            });
+        }
+
         $randomRecipes = Recipe::inRandomOrder()->limit(2)->get();
         $articles = Articles::orderBy('created_at', 'desc')->limit(2)->get();
-        return view('user.dashboard', compact('recipes', 'randomRecipes', 'articles'));
+
+        return view('user.dashboard', compact('recipes', 'randomRecipes', 'articles', 'search'));
     }
     public function search()
     {
@@ -34,7 +73,7 @@ class UserController extends Controller
     public function selected(Request $request)
     {
         $request->validate([
-            'ingredients' => 'required|array|min:1|max:5',
+            'ingredients' => 'required|array|min:1',
             'ingredients.*' => 'exists:ingredients,id',
         ]);
         $selectedIngredientsIds = $request->input('ingredients');
@@ -46,8 +85,6 @@ class UserController extends Controller
     public function found(Request $request)
     {
         $ingredientIds = $request->input('ingredient');
-
-        
         $recipes = Recipe::whereHas('recipeIngredients', function ($query) use ($ingredientIds) {
             $query->whereIn('ingredient_id', $ingredientIds); // Cari resep yang memiliki salah satu bahan
         })->get();
@@ -115,7 +152,9 @@ class UserController extends Controller
         $idCategory = Category::where('name', 'like', '%' . $request->food . '%')->first();
 
         if (!$idIngredients || !$idCategory) {
-            $recipes = [];
+            // $recipes = [];
+            $recipes = collect();
+            
         } else {
             $recipes = Category::find($idCategory->id)
                 ->recipes()
@@ -125,6 +164,11 @@ class UserController extends Controller
                 ->limit(2)
                 ->get();
         }
+        $user = auth()->user();
+        $user->category = $request->food;
+        $user->ingredients = $request->ingredients;
+        $user->save();
+    
         session(['recipes' => $recipes]);
 
         return redirect()->route('user.dashboard');

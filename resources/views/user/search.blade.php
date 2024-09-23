@@ -3,7 +3,7 @@
         <div class="w-full h-8 bg-[#FBBC05]"></div>
         <div class="flex px-6 lg:px-8 h-16">
             <div class="flex item-center -ms-4 md:ms-0 md:justify-center justify-between w-full">
-                <a href="" class="text-white items-center mr-24 flex">
+                <a href="{{ url()->previous() }}" class="text-white items-center mr-24 flex">
                     <svg width="30" height="30" viewBox="0 0 30 30" fill="currentColor"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -15,7 +15,7 @@
             </div>
         </div>
         <div class="bg-white pt-2 pb-2">
-            <form class="mx-4 ">
+            <form class="mx-4 " id="search-form">
                 <label for="default-search"
                     class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
                 <div class="relative">
@@ -27,9 +27,9 @@
                         </svg>
                     </div>
                     <div class="flex">
-                        <input type="search" id="default-search"
+                        <input id="ingredient-search"
                             class="block h-12 w-72 p-1 ps-10 text-sm text-gray-900 border-none focus:border-transparent focus:outline-none focus:ring-0  rounded-md bg-gray-100 "
-                            placeholder="Search Mockups, Logos..." required />
+                            placeholder="Cari Bahan" />
                         <div class="bg-gray-100 h-12 flex items-center rounded-md p-3 ms-2">
                             <svg id="fi_3024539" enable-background="new 0 0 189.524 189.524" height="24"
                                 viewBox="0 0 189.524 189.524" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -65,40 +65,34 @@
     </nav>
     <main class="pt-48 pb-40">
         <div class="mx-auto md:mt-2 lg:px-8 block max-w-md">
-            @php
-                $currentLetter = '';
-            @endphp
-
             <form id="ingredient-form" method="GET" action="{{ route('user.selected') }}">
                 @csrf
-                @foreach ($ingredients as $ingredient)
-                    @if (strtoupper($ingredient->name[0]) !== $currentLetter)
-                        @php
-                            $currentLetter = strtoupper($ingredient->name[0]);
-                        @endphp
+                <div id="ingredients-list">
+                    @php
+                        $currentLetter = '';
+                    @endphp
 
-                        <div class="mx-4 mt-6">
-                            <p class="font-poppins font-medium text-2xl">{{ $currentLetter }}</p>
+                    @foreach ($ingredients as $ingredient)
+                        @if (strtoupper($ingredient->name[0]) !== $currentLetter)
+                            @php
+                                $currentLetter = strtoupper($ingredient->name[0]);
+                            @endphp
+                            <div class="mx-4 mt-6 letter-group" data-letter="{{ $currentLetter }}">
+                                <p class="font-poppins font-medium text-2xl">{{ $currentLetter }}</p>
+                            </div>
+                        @endif
+                        <div class="mx-4 mt-6 ingredient-item" data-name="{{ strtolower($ingredient->name) }}">
+                            <div class="flex items-center mb-4 mt-5">
+                                <label for="ingredient-checkbox-{{ $ingredient->id }}"
+                                    class="text-2xl w-full font-light text-gray-900">{{ $ingredient->name }}</label>
+                                <input id="ingredient-checkbox-{{ $ingredient->id }}" type="checkbox"
+                                    name="ingredients[]" value="{{ $ingredient->id }}"
+                                    class="ingredient-checkbox w-4 h-4 text-black border-none rounded-full focus:ring-0">
+                            </div>
                         </div>
-                    @endif
-
-                    <div class="mx-4 mt-6">
-                        <div class="flex items-center mb-4 mt-5">
-                            <label for="ingredient-checkbox-{{ $ingredient->id }}"
-                                class="text-2xl w-full font-light text-gray-900">{{ $ingredient->name }}</label>
-                            <input id="ingredient-checkbox-{{ $ingredient->id }}" type="checkbox" name="ingredients[]"
-                                value="{{ $ingredient->id }}"
-                                class="ingredient-checkbox w-4 h-4 text-black border-none rounded-full focus:ring-0">
-                        </div>
-                    </div>
-                @endforeach
-
-                <button type="submit"
-                    class="flex w-auto  justify-center text-white bg-[#FBBC05] rounded-lg bg-gradient-to-r px-4  py-3  font-poppins font-normal leading-6 shadow-sm mt-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2">
-                    Lanjutkan
-                </button>
+                    @endforeach
+                </div>
             </form>
-
         </div>
     </main>
     <div class="bg-white w-full h-28 fixed bottom-4">
@@ -131,29 +125,103 @@
     </div>
     <x-footer></x-footer>
     <script>
-        const checkboxes = document.querySelectorAll('.ingredient-checkbox');
-        const maxChecked = 5;
-
-        checkboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', () => {
-                // Hitung ulang jumlah checkbox yang dicentang setiap kali ada perubahan
-                let checkedCount = 0;
-                checkboxes.forEach(cb => {
-                    if (cb.checked) {
-                        checkedCount++;
+        document.addEventListener('DOMContentLoaded', function() {
+            const checkboxes = document.querySelectorAll('.ingredient-checkbox');
+            const searchInput = document.getElementById('ingredient-search');
+            const ingredientsList = document.getElementById('ingredients-list');
+        
+            // Check if we're coming back from the selected view
+            const isReturningFromSelected = localStorage.getItem('returningFromSelected') === 'true';
+        
+            let selectedIngredients = [];
+        
+            if (isReturningFromSelected) {
+                // Clear localStorage and reset selectedIngredients
+                localStorage.removeItem('selectedIngredients');
+                localStorage.removeItem('dashboardSelectedIngredients');
+                localStorage.removeItem('returningFromSelected');
+            } else {
+                // Load previously selected ingredients
+                selectedIngredients = JSON.parse(localStorage.getItem('selectedIngredients')) || [];
+                const dashboardSelectedIngredients = JSON.parse(localStorage.getItem('dashboardSelectedIngredients')) || [];
+                
+                // Merge dashboard selections with current selections
+                dashboardSelectedIngredients.forEach(id => {
+                    if (!selectedIngredients.includes(id)) {
+                        selectedIngredients.push(id);
                     }
                 });
-
-                // Perbarui tampilan jumlah bahan terpilih
-                document.getElementById('selected-count').textContent = checkedCount;
-
-                // Nonaktifkan checkbox lain jika sudah 5 terpilih
-                checkboxes.forEach(cb => {
-                    if (!cb.checked) {
-                        cb.disabled = checkedCount >= maxChecked;
+            }
+        
+            // Update selected count display
+            function updateSelectedCount() {
+                document.getElementById('selected-count').textContent = selectedIngredients.length;
+            }
+        
+            // Apply selected status for ingredients
+            function applySelectedStatus() {
+                checkboxes.forEach(checkbox => {
+                    checkbox.checked = selectedIngredients.includes(checkbox.value);
+                });
+                updateSelectedCount();
+                localStorage.setItem('selectedIngredients', JSON.stringify(selectedIngredients));
+            }
+        
+            // Apply selected status on page load
+            applySelectedStatus();
+        
+            // Handle checkbox selection
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', () => {
+                    if (checkbox.checked) {
+                        if (!selectedIngredients.includes(checkbox.value)) {
+                            selectedIngredients.push(checkbox.value);
+                        }
+                    } else {
+                        selectedIngredients = selectedIngredients.filter(id => id !== checkbox.value);
                     }
+                    localStorage.setItem('selectedIngredients', JSON.stringify(selectedIngredients));
+                    updateSelectedCount();
                 });
             });
+        
+            // Search functionality
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                const ingredients = document.querySelectorAll('.ingredient-item');
+                const letterGroups = document.querySelectorAll('.letter-group');
+        
+                let visibleLetters = new Set();
+        
+                // Filter ingredients based on search input
+                ingredients.forEach(ingredient => {
+                    const name = ingredient.dataset.name.toLowerCase();
+                    if (name.includes(searchTerm)) {
+                        ingredient.style.display = '';
+                        visibleLetters.add(name[0].toUpperCase());
+                    } else {
+                        ingredient.style.display = 'none';
+                    }
+                });
+        
+                // Show/hide letter groups based on filtered ingredients
+                letterGroups.forEach(group => {
+                    const letter = group.dataset.letter;
+                    if (visibleLetters.has(letter)) {
+                        group.style.display = '';
+                    } else {
+                        group.style.display = 'none';
+                    }
+                });
+        
+                // Reapply selected status after filtering
+                applySelectedStatus();
+            });
+        
+            // Set flag when navigating to selected view
+            document.getElementById('ingredient-form').addEventListener('submit', function() {
+                localStorage.setItem('returningFromSelected', 'true');
+            });
         });
-    </script>
+        </script>
 </x-layout>

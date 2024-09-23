@@ -4,7 +4,7 @@
             <div class="w-full h-8 bg-[#FBBC05]"></div>
             <div class="flex px-6 lg:px-8 h-16">
                 <div class="flex item-center -ms-4 md:ms-0 md:justify-center justify-between w-full">
-                    <a href="" class="text-white items-center mr-24 flex">
+                    <a href="{{ url()->previous() }}" class="text-white items-center mr-24 flex">
                         <svg width="30" height="30" viewBox="0 0 30 30" fill="currentColor" F
                             xmlns="http://www.w3.org/2000/svg">
                             <path

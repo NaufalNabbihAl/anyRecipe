@@ -52,7 +52,7 @@ Route::controller(FacebookLoginController::class)->as('facebook.')->group(functi
 
 Route::get('/search-console/sites', [GoogleSearchConsoleController::class, 'listSites']);
 Route::get('/search-console/analytics/{siteUrl}', [GoogleSearchConsoleController::class, 'getSearchAnalytics']);
-Route::get('/analytics', [GoogleSearchConsoleController::class, 'getAnalytics'])->name('analytics.show');
+Route::get('/analytics', [GoogleSearchConsoleController::class, 'showAnalyticsChart'])->name('analytics.show');
 Route::get('/search-console/add-site', [GoogleSearchConsoleController::class, 'addSiteview'])->name('search-console.add-site');
 Route::post('/search-console/add-site', [GoogleSearchConsoleController::class, 'addSite'])->name('search-console.add-site');
 
